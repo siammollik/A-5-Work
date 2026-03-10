@@ -1,7 +1,7 @@
 const issuesCount = document.getElementById("issues-count")
 const allBtn = document.getElementById("allBtn");
 const openBtn = document.getElementById("openBtn");
-const closeBtn = document.getElementById("closedBtn")
+const closeBtn = document.getElementById("closeBtn")
 let allIssues = [];
 const loadData = () => {
     manageSpinner(true)
@@ -106,16 +106,32 @@ const displayData = (dataAll) => {
 loadData()
 
 // filter
-document.getElementById("allBtn").addEventListener("click", () => {
+allBtn.addEventListener("click", () => {
     displayData(allIssues);
 });
 
-document.getElementById("openBtn").addEventListener("click", () => {
+openBtn.addEventListener("click", () => {
     const openIssues = allIssues.filter(issue => issue.status === "open");
     displayData(openIssues);
+
 });
 
-document.getElementById("closeBtn").addEventListener("click", () => {
+closeBtn.addEventListener("click", () => {
     const closedIssues = allIssues.filter(issue => issue.status === "closed");
     displayData(closedIssues);
+
+});
+
+
+// search
+searchBtn.addEventListener("click", () => {
+
+    const searchText = searchInput.value.toLowerCase();
+
+    const filteredIssues = allIssues.filter(issue =>
+        issue.title.toLowerCase().includes(searchText) ||
+        issue.description.toLowerCase().includes(searchText)
+    );
+
+    displayData(filteredIssues);
 });
