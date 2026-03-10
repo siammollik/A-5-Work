@@ -1,10 +1,16 @@
 const issuesCount = document.getElementById("issues-count")
+const allBtn = document.getElementById("allBtn");
+const openBtn = document.getElementById("openBtn");
+const closeBtn = document.getElementById("closedBtn")
 let allIssues = [];
 const loadData = () => {
     manageSpinner(true)
     fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
         .then((res) => res.json())
-        .then((data) => displayData(data.data))
+        .then((data) => {
+            allIssues = data.data
+            displayData(allIssues)
+        })
 };
 // modal
 const loadCardDetail = async (id) => {
@@ -96,4 +102,20 @@ const displayData = (dataAll) => {
     }
     manageSpinner(false);
 }
+
 loadData()
+
+// filter
+document.getElementById("allBtn").addEventListener("click", () => {
+    displayData(allIssues);
+});
+
+document.getElementById("openBtn").addEventListener("click", () => {
+    const openIssues = allIssues.filter(issue => issue.status === "open");
+    displayData(openIssues);
+});
+
+document.getElementById("closeBtn").addEventListener("click", () => {
+    const closedIssues = allIssues.filter(issue => issue.status === "closed");
+    displayData(closedIssues);
+});
