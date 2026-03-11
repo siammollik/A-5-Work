@@ -5,6 +5,8 @@ const closeBtn = document.getElementById("closeBtn")
 const searchBtn = document.getElementById("search-btn")
 const input = document.getElementById("input-search");
 let allIssues = [];
+
+// data from Api All data
 const loadData = () => {
     manageSpinner(true)
     fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
@@ -34,10 +36,7 @@ const displayCardDetails = (data) => {
                     <div class="space-y-2">
                         <h3 class="font-bold">${data.title}</h3>
                         <p>${data.description}</p>
-                        <div class="flex gap-5">
-                            <p class="bg-red-200 w-20 text-center rounded-full text-red-600">Badge1</p>
-                            <p class="bg-yellow-200 w-20 text-center rounded-full text-yellow-800">Badge2</p>
-                        </div>
+                       
                     </div>
                     <div class="border-t-2 ">
                         <p>#${data.author}</p>
@@ -88,15 +87,10 @@ const displayData = (dataAll) => {
                     <div class="space-y-2">
                         <h3 class="font-bold">${data.title}</h3>
                         <p>${data.description}</p>
-                        <div class="flex gap-5">
-                            <p class="bg-red-200 w-20 text-center rounded-full text-red-600">badge</p>
-                            <p class="bg-yellow-200 w-20 text-center rounded-full text-yellow-800">badge</p>
-                        </div>
                     </div>
                     <div class="border-t-2 ">
                         <p>#${data.author}</p>
                         <p>${data.updatedAt}</p>
-
                     </div>
                 </div>
         `
